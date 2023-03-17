@@ -29,6 +29,7 @@ const ProfileGrid = ({ id }: any) => {
           userPost?.map((post: any) => (
             <PostBlock
               key={post.id}
+              userId={post.id}
               id={post.id}
               image={post.data().image}
               profile={post.data().profileImg}
