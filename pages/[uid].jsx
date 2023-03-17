@@ -27,7 +27,7 @@ const profile = () => {
   const [canFollow, setcanFollow] = useState(true);
 
   useEffect(() => {
-    if (!id) alert("User not found");
+    if (!id) return;
     onSnapshot(collection(db, "users"), (snapshot) => {
       // TypeError: Cannot read properties of undefined (reading 'data')
       if (!snapshot.docs.filter((doc) => doc.id === id)[0])
