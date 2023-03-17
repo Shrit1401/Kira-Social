@@ -19,6 +19,13 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/[uid].jsx",
+    "components/Reusable/Modal.jsx",
+    "components/Reusable/PostBlock.jsx"
+  ],
   "exclude": ["node_modules"]
 }

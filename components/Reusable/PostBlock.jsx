@@ -35,7 +35,7 @@ const PostBlock = ({
   caption,
   userId,
   timestamp,
-}: any) => {
+}) => {
   const router = useRouter();
   const [show, setshow] = useState(false);
   const [showComments, setshowComments] = useState(false);
@@ -56,13 +56,13 @@ const PostBlock = ({
         collection(db, "posts", id, "comments"),
         orderBy("timestamp", "desc")
       ),
-      (snapshot: any) => {
+      (snapshot) => {
         setcomments(snapshot.docs);
       }
     );
   }, [db, id]);
 
-  const postComment = async (e: any) => {
+  const postComment = async (e) => {
     e.preventDefault();
 
     const commentToSend = comment;
@@ -83,7 +83,7 @@ const PostBlock = ({
       onSnapshot(
         // likes
         query(collection(db, "posts", id, "likes")),
-        (snapshot: any) => {
+        (snapshot) => {
           setlikes(snapshot.docs);
         }
       ),
@@ -93,7 +93,7 @@ const PostBlock = ({
   useEffect(
     () =>
       sethasLiked(
-        likes.findIndex((like: any) => like.id === auth.currentUser?.uid) !== -1
+        likes.findIndex((like) => like.id === auth.currentUser?.uid) !== -1
       ),
     [likes]
   );
@@ -283,7 +283,7 @@ const PostBlock = ({
           </div>
         </div>
 
-        {comments.map((comment: any) => (
+        {comments.map((comment) => (
           <div className="flex items-center gap-2 ml-5 mt-5" key={id}>
             <img
               src={comment.data().profileImage}

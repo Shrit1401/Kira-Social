@@ -18,10 +18,10 @@ const Modal = () => {
   const [loading, setLoading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const filePickerRef: any = React.useRef(null);
+  const filePickerRef = React.useRef(null);
   const captionRef = React.useRef(null);
 
-  const addImageToPost = (e: any) => {
+  const addImageToPost = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);

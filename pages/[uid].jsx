@@ -21,24 +21,24 @@ const profile = () => {
   const router = useRouter();
   const id = router.query.uid;
 
-  const [user, setUser] = useState<any>(null);
-  const [userPost, setUserPost] = useState<any>(null);
+  const [user, setUser] = useState < any > null;
+  const [userPost, setUserPost] = useState < any > null;
 
   const [canFollow, setcanFollow] = useState(true);
 
   useEffect(() => {
     if (!id) return;
-    onSnapshot(collection(db, "users"), (snapshot: any) => {
-      setUser(snapshot.docs.filter((doc: any) => doc.id === id)[0].data());
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      setUser(snapshot.docs.filter((doc) => doc.id === id)[0].data());
     });
   }, [id, db]);
 
   useEffect(() => {
     onSnapshot(
       query(collection(db, "posts"), orderBy("timestamp", "desc")),
-      (snapshot: any) => {
+      (snapshot) => {
         setUserPost(
-          snapshot.docs.filter((doc: any) => doc.data().usernameID === id)
+          snapshot.docs.filter((doc) => doc.data().usernameID === id)
         );
       }
     );
@@ -57,27 +57,27 @@ const profile = () => {
   }),
     [id, user, auth];
 
-  const [followers, setfollowers] = useState<any>([]);
+  const [followers, setfollowers] = useState < any > [];
   const [isFollwer, setisFollwer] = useState(false);
 
-  const [followings, setfollowings] = useState<any>([]);
+  const [followings, setfollowings] = useState < any > [];
   const [isFollwing, setisFollwing] = useState(true);
 
-  const [userFollowing, setuserFollowing] = useState<any>([]);
+  const [userFollowing, setuserFollowing] = useState < any > [];
 
   useEffect(() => {
     if (!user && !auth.currentUser) return;
 
     onSnapshot(
       query(collection(db, "users", user.userId, "followers")),
-      (snapshot: any) => {
+      (snapshot) => {
         setfollowers(snapshot.docs);
       }
     );
 
     onSnapshot(
       query(collection(db, "users", user.userId, "following")),
-      (snapshot: any) => {
+      (snapshot) => {
         setuserFollowing(snapshot.docs);
       }
     );
@@ -85,7 +85,7 @@ const profile = () => {
     if (auth.currentUser) {
       onSnapshot(
         query(collection(db, "users", auth.currentUser?.uid, "following")),
-        (snapshot: any) => {
+        (snapshot) => {
           setfollowings(snapshot.docs);
         }
       );
@@ -96,7 +96,7 @@ const profile = () => {
     if (!auth.currentUser && !user) return;
     setisFollwing(
       followings.findIndex(
-        (like: any) => like.data().userId === auth.currentUser?.uid
+        (like) => like.data().userId === auth.currentUser?.uid
       ) !== -1
     );
   }, [followings, auth.currentUser?.uid, db, user]);
@@ -104,8 +104,7 @@ const profile = () => {
   useEffect(() => {
     if (!auth.currentUser && !user) return;
     setisFollwer(
-      followers.findIndex((like: any) => like.data().userId === user.userId) !==
-        -1
+      followers.findIndex((like) => like.data().userId === user.userId) !== -1
     );
   }, [followers, auth.currentUser?.uid, db, user]);
 
