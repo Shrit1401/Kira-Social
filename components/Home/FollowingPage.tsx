@@ -2,6 +2,7 @@ import { auth, db } from "@/lib/firebase";
 import { onSnapshot, collection } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const FollowingPage = () => {
   const router = useRouter();
@@ -54,6 +55,12 @@ const FollowingPage = () => {
                 className="btn"
                 onClick={() => {
                   auth.signOut();
+                  toast.success("Signed Out Succesfly", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+
+                    theme: "colored",
+                  });
                   setSignoutModal(false);
                 }}
               >

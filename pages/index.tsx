@@ -3,7 +3,6 @@ import Head from "next/head";
 import Navbar from "../components/Reusable/navbar";
 import FollowingPage from "@/components/Home/FollowingPage";
 import PostGrid from "@/components/Home/PostGrid";
-import { useEffect } from "react";
 import Modal from "@/components/Reusable/Modal";
 import { ToastContainer } from "react-toastify";
 
