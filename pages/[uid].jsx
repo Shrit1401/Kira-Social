@@ -21,8 +21,8 @@ const profile = () => {
   const router = useRouter();
   const id = router.query.uid;
 
-  const [user, setUser] = useState < any > null;
-  const [userPost, setUserPost] = useState < any > null;
+  const [user, setUser] = useState(null);
+  const [userPost, setUserPost] = useState(null);
 
   const [canFollow, setcanFollow] = useState(true);
 
@@ -57,13 +57,13 @@ const profile = () => {
   }),
     [id, user, auth];
 
-  const [followers, setfollowers] = useState < any > [];
+  const [followers, setfollowers] = useState();
   const [isFollwer, setisFollwer] = useState(false);
 
-  const [followings, setfollowings] = useState < any > [];
+  const [followings, setfollowings] = useState();
   const [isFollwing, setisFollwing] = useState(true);
 
-  const [userFollowing, setuserFollowing] = useState < any > [];
+  const [userFollowing, setuserFollowing] = useState();
 
   useEffect(() => {
     if (!user && !auth.currentUser) return;
