@@ -27,8 +27,12 @@ const profile = () => {
   const [canFollow, setcanFollow] = useState(true);
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) alert("User not found");
     onSnapshot(collection(db, "users"), (snapshot) => {
+      // TypeError: Cannot read properties of undefined (reading 'data')
+      if (!snapshot.docs.filter((doc) => doc.id === id)[0])
+        alert("User not found");
+
       setUser(snapshot.docs.filter((doc) => doc.id === id)[0].data());
     });
   }, [id, db]);
@@ -57,10 +61,10 @@ const profile = () => {
   }),
     [id, user, auth];
 
-  const [followers, setfollowers] = useState();
+  const [followers, setfollowers] = useState([]);
   const [isFollwer, setisFollwer] = useState(false);
 
-  const [followings, setfollowings] = useState();
+  const [followings, setfollowings] = useState([]);
   const [isFollwing, setisFollwing] = useState(true);
 
   const [userFollowing, setuserFollowing] = useState();

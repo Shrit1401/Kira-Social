@@ -131,8 +131,8 @@ const PostBlock = ({
                 {caption}
               </p>
 
-              <div
-                onClick={() => router.push(`/${userId}`)}
+              <a
+                href={`/${userId}`}
                 className="flex cursor-pointer hover:opacity-75 items-center justify-start w-full gap-3 transition-all duration-300 ease-in-out"
               >
                 <img
@@ -149,7 +149,7 @@ const PostBlock = ({
                     title="Verified Account"
                   />
                 )}
-              </div>
+              </a>
             </div>
           </div>
         </div>
