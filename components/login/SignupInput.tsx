@@ -14,6 +14,7 @@ import {
   uploadString,
 } from "firebase/storage";
 import { collection, doc, setDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const SignupInput = () => {
   const router = useRouter();
@@ -79,6 +80,7 @@ const SignupInput = () => {
         setLoading(false);
       });
 
+    if (!auth.currentUser) return;
     await updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: await getDownloadURL(imageRef),
@@ -134,6 +136,7 @@ const SignupInput = () => {
 
         const usersRef = collection(db, "users");
         const userRef = doc(usersRef, user.uid);
+        if (!auth.currentUser) return toast.info("auth not ready");
         setDoc(userRef, {
           name: user.displayName,
           email: user.email,
