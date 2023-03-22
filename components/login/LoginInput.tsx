@@ -105,16 +105,12 @@ const LoginInput = () => {
           <p className="capitalize font-[500]">{error}</p>
         </div>
       )}
-
-      <button className="btn mt-5 w-full" onClick={handleGoogleLogin}>
-        Sign Up With Google
-      </button>
       <div
         className="mt-10 flex justify-center items-center"
         onClick={() => router.push("/signup")}
       >
         <p className="text-[#c5c5c5]">Don't have an account?</p>
-        <a href="#" className="text-[#c5c5c5] ml-2">
+        <a href="#" className="text-[#c5c5c5]font-bold hover:text-[#fff] ml-2">
           Sign Up
         </a>
       </div>

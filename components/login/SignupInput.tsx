@@ -24,6 +24,8 @@ const SignupInput = () => {
   const [password, setPassword] = React.useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState("");
+  const [age, setAge] = useState("0");
+  const [gender, setGender] = useState("select");
 
   const [loading, setLoading] = useState(false);
 
@@ -44,6 +46,9 @@ const SignupInput = () => {
     if (!name) return setError("please enter a name");
     if (!email) return setError("please enter a email");
     if (!password) return setError("please enter a password");
+    if (!age) return setError("please enter your age");
+    if (gender === "select") return setError("please select your gender");
+    if (parseInt(age) < 0) return setError("please enter a valid age");
 
     setLoading(true);
     const imageRef = ref(storage, `pfp/${name}`);
@@ -114,6 +119,8 @@ const SignupInput = () => {
       email: auth.currentUser.email,
       photoUrl: auth.currentUser.photoURL,
       userId: auth.currentUser.uid,
+      age: age,
+      gender: gender,
     }).catch((error) => {
       console.log("error", error);
     });
@@ -220,6 +227,27 @@ const SignupInput = () => {
         />
 
         <input
+          id="age"
+          onChange={(e) => setAge(e.target.value)}
+          className="bg-primaryBlack focus:border-[#fff] transition-all duration-700 px-3 py-2 sm:px-3 sm:py-2 border-opacity-50  rounded-lg border border-borderBlack  text-white text-white outline-none "
+          type="number"
+          placeholder="Age"
+        />
+
+        <select
+          name="options"
+          onChange={(e) => setGender(e.target.value)}
+          id="options"
+          placeholder="Select a Gender"
+          className="bg-primaryBlack focus:border-[#fff] transition-all duration-700 px-3 py-2 sm:px-3 sm:py-2 border-opacity-50  rounded-lg border border-borderBlack  text-white text-white outline-none"
+        >
+          <option value="select">Select a Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Can't Say</option>
+        </select>
+
+        <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
@@ -239,16 +267,12 @@ const SignupInput = () => {
         </div>
       )}
 
-      <button className="btn mt-5 w-full" onClick={signInWithGoogle}>
-        Sign In With Google
-      </button>
-
       <div
         className="mt-10 flex justify-center items-center"
         onClick={() => router.push("/login")}
       >
         <p className="text-[#c5c5c5]">Log In With Existing Account?</p>
-        <a href="#" className="text-[#c5c5c5] ml-2">
+        <a href="#" className="text-[#c5c5c5] font-bold hover:text-[#fff] ml-2">
           Log In
         </a>
       </div>
