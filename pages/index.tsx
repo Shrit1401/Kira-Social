@@ -5,8 +5,18 @@ import FollowingPage from "@/components/Home/FollowingPage";
 import PostGrid from "@/components/Home/PostGrid";
 import Modal from "@/components/Reusable/Modal";
 import { ToastContainer } from "react-toastify";
+import { auth } from "@/lib/firebase";
 
 export default function Home() {
+  if (!auth.currentUser?.emailVerified)
+    return (
+      <div>
+        <Navbar />
+        <h1 className="flex justify-center items-center h-[90vh] capitalize text-3xl">
+          please verify your email To continue using Kira
+        </h1>
+      </div>
+    );
   return (
     <>
       <Head>

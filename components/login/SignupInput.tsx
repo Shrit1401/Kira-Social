@@ -5,6 +5,7 @@ import {
   updateProfile,
   GoogleAuthProvider,
   signInWithPopup,
+  sendEmailVerification,
 } from "firebase/auth";
 import { auth, db, storage } from "@/lib/firebase";
 import {
@@ -124,6 +125,16 @@ const SignupInput = () => {
     }).catch((error) => {
       console.log("error", error);
     });
+
+    sendEmailVerification(auth.currentUser)
+      .then(() => {
+        console.log("email sent");
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+    alert("account created, please verify your email");
 
     setLoading(false);
     router.push("/");

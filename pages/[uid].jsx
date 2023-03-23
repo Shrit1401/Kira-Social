@@ -18,6 +18,15 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 const profile = () => {
+  if (!auth.currentUser?.emailVerified)
+    return (
+      <div>
+        <Navbar />
+        <h1 className="flex justify-center items-center h-[90vh] capitalize text-3xl">
+          please verify your email To continue using Kira
+        </h1>
+      </div>
+    );
   const router = useRouter();
   const id = router.query.uid;
 
