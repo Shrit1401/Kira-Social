@@ -8,12 +8,13 @@ import { ToastContainer } from "react-toastify";
 import { auth } from "@/lib/firebase";
 
 export default function Home() {
-  if (!auth.currentUser?.emailVerified)
+  if (!auth.currentUser?.emailVerified && auth.currentUser)
     return (
       <div>
         <Navbar />
         <h1 className="flex justify-center items-center h-[90vh] capitalize text-3xl">
-          please verify your email To continue using Kira
+          please verify your email To continue using Kira and please reload when
+          done
         </h1>
       </div>
     );
